@@ -9,7 +9,8 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export DOTFILES="$HOME/dotfiles"
+export ZSH="$DOTFILES/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -71,7 +72,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=$DOTFILES/.oh-my-zsh-custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -114,20 +115,33 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/vrotan/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('~/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/Users/vrotan/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/vrotan/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "~/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "~/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/Users/vrotan/miniconda3/bin:$PATH"
+        export PATH="~/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ ! -f $DOTFILES/.p10k.zsh ]] || source $DOTFILES/.p10k.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f $DOTFILES/.fzf.zsh ] && source $DOTFILES/.fzf.zsh
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}~/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "~/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "~/.fzf/shell/key-bindings.zsh"
