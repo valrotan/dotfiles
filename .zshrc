@@ -134,14 +134,14 @@ unset __conda_setup
 # [ -f $DOTFILES/.fzf.zsh ] && source $DOTFILES/.fzf.zsh
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == *~/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}~/.fzf/bin"
+if [[ ! "$PATH" == *$DOTFILES/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}$DOTFILES/.fzf/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "~/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$DOTFILES/.fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "~/.fzf/shell/key-bindings.zsh"
+source "$DOTFILES/.fzf/shell/key-bindings.zsh"
