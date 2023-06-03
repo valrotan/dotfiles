@@ -113,17 +113,6 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
 " Add a bit extra margin to the left
 set foldcolumn=1
 
@@ -136,26 +125,6 @@ syntax enable
 
 " Set regular expression engine automatically
 set regexpengine=0
-
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
-
-try
-    colorscheme desert
-catch
-endtry
-
-set background=dark
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -390,6 +359,7 @@ call plug#begin()
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-fugitive'
+  Plug 'morhetz/gruvbox'
 call plug#end()
 
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -401,3 +371,20 @@ nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>F :Rg<CR>
 :command! Ag Rg
 
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+
+""" COLOR CONFIG
+
+" Make italics work proper on a mac
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
+set background=dark
+let g:gruvbox_italic=1
+
+"Use 24-bit (true-color)
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+autocmd vimenter * ++nested colorscheme gruvbox
