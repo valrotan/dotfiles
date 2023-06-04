@@ -13,3 +13,6 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh/
+[submodule "neovim"]
+	path = neovim
+	url = git@github.com:neovim/neovim.git
