@@ -360,7 +360,10 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'tpope/vim-fugitive'
   Plug 'morhetz/gruvbox'
+  Plug 'Kazark/vim-SimpleSmoothScroll'
 call plug#end()
+
+let g:SimpleSmoothScrollDelay=4
 
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
