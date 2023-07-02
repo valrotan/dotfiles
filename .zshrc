@@ -131,12 +131,9 @@ unset __conda_setup
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $DOTFILES/.p10k.zsh ]] || source $DOTFILES/.p10k.zsh
 
-# [ -f $DOTFILES/.fzf.zsh ] && source $DOTFILES/.fzf.zsh
-# Setup fzf
-# ---------
-if [[ ! "$PATH" == *$DOTFILES/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}$DOTFILES/.fzf/bin"
-fi
+export FZF_CTRL_T_OPTS="
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # Auto-completion
 # ---------------

@@ -334,21 +334,34 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
 endif
 
 call plug#begin()
-  Plug 'preservim/nerdtree'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'morhetz/gruvbox'
-  Plug 'Kazark/vim-SimpleSmoothScroll'
-  Plug 'tpope/vim-commentary'
+    if has('nvim')
+        Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+    else
+        Plug 'preservim/nerdtree'
+    endif
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'morhetz/gruvbox'
+    Plug 'tpope/vim-commentary'
+    Plug 'nvim-lualine/lualine.nvim'
+    Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
+
+if has('nvim')
+    source nvim_config.lua
+endif
 
 let g:SimpleSmoothScrollDelay=4
 
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+if has('nvim')
+    nnoremap <C-f> <cmd>CHADopen<cr>
+else
+    nnoremap <leader>n :NERDTreeFocus<CR>
+    nnoremap <C-n> :NERDTree<CR>
+    nnoremap <C-t> :NERDTreeToggle<CR>
+    nnoremap <C-f> :NERDTreeFind<CR>
+endif
 
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>l :Rg<CR>
