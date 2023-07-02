@@ -16,7 +16,14 @@ cd ..
 # setup fzf
 .fzf/install --bin
 
-for fname in .zshrc .vimrc .tmux.conf; do
-    [ -e ~/$fname ] && mv ~/$fname ~/$fname.before_dotfiles
-    ln -s $DOTFILES/$fname ~/$fname
-done;
+# link dotfiles
+link() {
+    local from="$1" to="$2"
+    [ -e $from ] && mv $from $from.before_dotfiles
+    ln -s $DOTFILES/$to $from
+}
+link "$HOME/.zshrc" ".zshrc"
+link "$HOME/.vimrc" ".vimrc"
+link "$HOME/.tmux.conf" ".tmux.conf"
+mkdir -p "$HOME/.config/nvim/"
+link "$HOME/.config/nvim/init.vim" ".vimrc"

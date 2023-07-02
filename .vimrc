@@ -327,6 +327,12 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
   Plug 'preservim/nerdtree'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -363,6 +369,8 @@ let &t_ZR="\e[23m"
 
 set background=dark
 let g:gruvbox_italic=1
+let g:gruvbox_bold=1
+let g:gruvbox_contrast_dark = 'hard'
 
 "Use 24-bit (true-color)
 if (has("termguicolors"))
