@@ -335,14 +335,16 @@ endif
 
 call plug#begin()
     if has('nvim')
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+        Plug 'ellisonleao/gruvbox.nvim'
     else
         Plug 'preservim/nerdtree'
+        Plug 'morhetz/gruvbox'
     endif
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-fugitive'
-    Plug 'morhetz/gruvbox'
     Plug 'tpope/vim-commentary'
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
