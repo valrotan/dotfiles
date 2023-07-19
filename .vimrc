@@ -59,6 +59,8 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
+set cursorline
+
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
 set langmenu=en
@@ -350,14 +352,17 @@ call plug#begin()
     Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
 
+let g:chadtree_settings = { 'view.sort_by': ['is_folder', 'file_name', 'ext'], 
+                          \ 'theme.text_colour_set': 'solarized_universal' }
+
 if has('nvim')
-    source nvim_config.lua
+    source ~/dotfiles/nvim_config.lua
 endif
 
 let g:SimpleSmoothScrollDelay=4
 
 if has('nvim')
-    nnoremap <C-f> <cmd>CHADopen<cr>
+    nnoremap <C-f> <cmd>CHADopen --always-focus<cr>
 else
     nnoremap <leader>n :NERDTreeFocus<CR>
     nnoremap <C-n> :NERDTree<CR>
@@ -393,4 +398,5 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-autocmd vimenter * ++nested colorscheme gruvbox
+colorscheme gruvbox
+hi CursorLine guibg=Grey16
