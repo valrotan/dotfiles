@@ -367,6 +367,7 @@ endif
 
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>l :Rg<CR>
+nnoremap <Leader>d :Rg <C-R><C-W><CR>
 :command! Ag Rg
 
 " vim fugitive config
