@@ -51,3 +51,6 @@ link "$HOME/.tmux.conf" ".tmux.conf"
 mkdir -p "$HOME/.config/nvim/"
 link "$HOME/.config/nvim/init.vim" ".vimrc"
 link "$HOME/.config/nvim/nvim_config.lua" "nvim_config.lua"
+
+# setup conda completion
+git clone https://github.com/esc/conda-zsh-completion

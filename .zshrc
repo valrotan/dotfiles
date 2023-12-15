@@ -85,7 +85,11 @@ plugins=(
     zsh-autosuggestions
 )
 
+fpath+=~/dotfiles/conda-zsh-completion
+
 source $ZSH/oh-my-zsh.sh
+
+compinit conda
 
 # User configuration
 
