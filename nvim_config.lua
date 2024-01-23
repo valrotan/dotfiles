@@ -6,7 +6,7 @@ require("gruvbox").setup({
   contrast = "hard"
 })
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup({
   ensure_installed = { "c", "python", "lua", "vim", "vimdoc", "query" },
   sync_install = false,
   auto_install = true,
@@ -21,4 +21,15 @@ require'nvim-treesitter.configs'.setup {
     end,
     additional_vim_regex_highlighting = false,
   },
-}
+})
+
+require("todo-comments").setup({
+  signs = false, -- show icons in the signs column
+  -- * after: highlights after the keyword (todo text)
+  highlight = {
+    pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for highlighting (vim regex)
+  },
+  search = {
+    pattern = [[\b(KEYWORDS)\b]], -- ripgrep regex
+  },
+})

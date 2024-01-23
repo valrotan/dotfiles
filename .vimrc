@@ -1,8 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set history=500
-
 filetype plugin on
 filetype indent on
 
@@ -24,12 +22,6 @@ set so=7
 
 set cursorline
 
-" Avoid garbled characters in Chinese language windows OS
-let $LANG='en'
-set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-
 " Turn on the Wild menu
 set wildmenu
 
@@ -42,10 +34,6 @@ else
 endif
 
 set ruler
-set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -81,6 +69,21 @@ set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" Make italics work proper on a mac
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
+" gruvbox
+set background=dark
+let g:gruvbox_italic=1
+let g:gruvbox_bold=1
+let g:gruvbox_contrast_dark = 'hard'
+
+" Use 24-bit (true-color)
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -281,6 +284,7 @@ call plug#begin()
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
         Plug 'ellisonleao/gruvbox.nvim'
+        Plug 'folke/todo-comments.nvim'
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'
@@ -291,17 +295,19 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'Exafunction/codeium.vim'
 call plug#end()
 
+" chadtree
 let g:chadtree_settings = { 'view.sort_by': ['is_folder', 'file_name', 'ext'], 
                           \ 'theme.text_colour_set': 'solarized_universal' }
 
+" lua config
 if has('nvim')
     source ~/dotfiles/nvim_config.lua
 endif
 
-let g:SimpleSmoothScrollDelay=4
-
+" chadtree/nerdtree
 if has('nvim')
     nnoremap <C-f> <cmd>CHADopen --always-focus<cr>
 else
@@ -311,33 +317,19 @@ else
     nnoremap <C-f> :NERDTreeFind<CR>
 endif
 
+" fzf
 nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>l :Rg<CR>
 nnoremap <Leader>d :Rg <C-R><C-W><CR>
 :command! Ag Rg
 
-" vim fugitive config
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+
+" vim fugitive
 nnoremap <Leader>gd :Gvdiffsplit<CR>
 nnoremap <Leader>gb :Git blame<CR>
 autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
 
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
-
-""" COLOR CONFIG
-
-" Make italics work proper on a mac
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
-
-set background=dark
-let g:gruvbox_italic=1
-let g:gruvbox_bold=1
-let g:gruvbox_contrast_dark = 'hard'
-
-"Use 24-bit (true-color)
-if (has("termguicolors"))
-  set termguicolors
-endif
-
 colorscheme gruvbox
+
 hi CursorLine guibg=Grey16
