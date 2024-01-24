@@ -285,6 +285,7 @@ call plug#begin()
         Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
         Plug 'ellisonleao/gruvbox.nvim'
         Plug 'folke/todo-comments.nvim'
+        Plug 'cameron-wags/rainbow_csv.nvim'
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'

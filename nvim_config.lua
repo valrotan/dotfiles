@@ -3,7 +3,8 @@ require('lualine').setup{
 }
 
 require("gruvbox").setup({
-  contrast = "hard"
+  contrast = "hard",
+  transparent_mode = true
 })
 
 require('nvim-treesitter.configs').setup({
@@ -32,4 +33,23 @@ require("todo-comments").setup({
   search = {
     pattern = [[\b(KEYWORDS)\b]], -- ripgrep regex
   },
+})
+
+require('rainbow_csv').setup({
+    config = true,
+    ft = {
+        'csv',
+        'tsv',
+        'csv_semicolon',
+        'csv_whitespace',
+        'csv_pipe',
+        'rfc_csv',
+        'rfc_semicolon'
+    },
+    cmd = {
+        'RainbowDelim',
+        'RainbowDelimSimple',
+        'RainbowDelimQuoted',
+        'RainbowMultiDelim'
+    }
 })
