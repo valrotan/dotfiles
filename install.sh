@@ -39,6 +39,9 @@ fi
 # setup fzf
 .fzf/install --bin
 
+# setup zoxide
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
 # link dotfiles
 link() {
     local from="$1" to="$2"

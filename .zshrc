@@ -146,3 +146,5 @@ export FZF_CTRL_T_OPTS="
 # Key bindings
 # ------------
 source "$DOTFILES/.fzf/shell/key-bindings.zsh"
+
+eval "$(zoxide init zsh)"
