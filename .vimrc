@@ -296,7 +296,8 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'Exafunction/codeium.vim'
+    " Plug 'Exafunction/codeium.vim' " copilot still better
+    Plug 'github/copilot.vim'
 call plug#end()
 
 " chadtree
