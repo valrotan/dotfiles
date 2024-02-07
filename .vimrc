@@ -286,6 +286,10 @@ call plug#begin()
         Plug 'ellisonleao/gruvbox.nvim'
         Plug 'folke/todo-comments.nvim'
         Plug 'cameron-wags/rainbow_csv.nvim'
+        Plug 'neovim/nvim-lspconfig'
+        Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+        Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+        Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'

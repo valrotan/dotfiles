@@ -7,5 +7,5 @@
 ## Mac
 
 ```
-defaults write com.apple.screencaptureui "thumbnailExpiration" -float 30 && killall SystemUIServer
+defaults write com.apple.screencaptureui "thumbnailExpiration" -float 100 && killall SystemUIServer
 ```

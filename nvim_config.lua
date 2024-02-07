@@ -53,3 +53,10 @@ require('rainbow_csv').setup({
         'RainbowMultiDelim'
     }
 })
+
+vim.g.coq_settings = {
+    auto_start = 'shut-up',
+    keymap = {
+        jump_to_mark = 'null'
+    }
+}
