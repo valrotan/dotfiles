@@ -56,6 +56,8 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
+set signcolumn=yes
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -287,9 +289,16 @@ call plug#begin()
         Plug 'folke/todo-comments.nvim'
         Plug 'cameron-wags/rainbow_csv.nvim'
         Plug 'neovim/nvim-lspconfig'
-        Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-        Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-        Plug 'ms-jpq/coq.thirdparty', {'branch': '3p'}
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+        Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+        Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'hrsh7th/cmp-buffer'
+        Plug 'hrsh7th/cmp-path'
+        Plug 'hrsh7th/cmp-cmdline'
+        Plug 'hrsh7th/nvim-cmp'
+        Plug 'williamboman/mason.nvim'
+        Plug 'williamboman/mason-lspconfig.nvim'
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'
@@ -300,8 +309,11 @@ call plug#begin()
     Plug 'tpope/vim-commentary'
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
+    " Plug 'SirVer/ultisnips'
     " Plug 'Exafunction/codeium.vim' " copilot still better
-    Plug 'github/copilot.vim'
+    " Plug 'github/copilot.vim', {'tag': 'v1.23.0'}
+    " Plug 'zbirenbaum/copilot.lua'
 call plug#end()
 
 " chadtree
@@ -324,9 +336,13 @@ else
 endif
 
 " fzf
-nnoremap <Leader>f :FZF<CR>
+" nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>l :Rg<CR>
 nnoremap <Leader>d :Rg <C-R><C-W><CR>
+nnoremap <leader>f <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+" nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 :command! Ag Rg
 
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
