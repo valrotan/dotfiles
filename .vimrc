@@ -312,7 +312,7 @@ call plug#begin()
     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     " Plug 'SirVer/ultisnips'
     " Plug 'Exafunction/codeium.vim' " copilot still better
-    " Plug 'github/copilot.vim', {'tag': 'v1.23.0'}
+    Plug 'github/copilot.vim'
     " Plug 'zbirenbaum/copilot.lua'
 call plug#end()
 
@@ -336,10 +336,10 @@ else
 endif
 
 " fzf
-" nnoremap <Leader>f :FZF<CR>
+nnoremap <Leader>f :FZF<CR>
 nnoremap <Leader>l :Rg<CR>
 nnoremap <Leader>d :Rg <C-R><C-W><CR>
-nnoremap <leader>f <cmd>Telescope find_files<cr>
+" nnoremap <leader>f <cmd>Telescope find_files<cr>
 " nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 " nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
