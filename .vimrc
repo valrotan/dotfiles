@@ -288,17 +288,28 @@ call plug#begin()
         Plug 'ellisonleao/gruvbox.nvim'
         Plug 'folke/todo-comments.nvim'
         Plug 'cameron-wags/rainbow_csv.nvim'
-        Plug 'neovim/nvim-lspconfig'
         Plug 'nvim-lua/plenary.nvim'
         Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
         Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+
+        " LSP Support
+        Plug 'neovim/nvim-lspconfig'
+        Plug 'williamboman/mason.nvim'
+        Plug 'williamboman/mason-lspconfig.nvim'
+
+        " Autocompletion Engine
+        Plug 'hrsh7th/nvim-cmp'
         Plug 'hrsh7th/cmp-nvim-lsp'
         Plug 'hrsh7th/cmp-buffer'
         Plug 'hrsh7th/cmp-path'
         Plug 'hrsh7th/cmp-cmdline'
-        Plug 'hrsh7th/nvim-cmp'
-        Plug 'williamboman/mason.nvim'
-        Plug 'williamboman/mason-lspconfig.nvim'
+        Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
+        Plug 'L3MON4D3/LuaSnip'
+
+        Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
+
+        Plug 'RRethy/vim-illuminate'
+        Plug 'numToStr/Comment.nvim'
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'
@@ -313,7 +324,6 @@ call plug#begin()
     " Plug 'SirVer/ultisnips'
     " Plug 'Exafunction/codeium.vim' " copilot still better
     Plug 'github/copilot.vim'
-    " Plug 'zbirenbaum/copilot.lua'
 call plug#end()
 
 " chadtree
@@ -355,3 +365,6 @@ autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
 colorscheme gruvbox
 
 hi CursorLine guibg=Grey16
+hi IlluminatedWordText gui=underline cterm=underline
+hi IlluminatedWordRead gui=underline cterm=underline
+hi IlluminatedWordWrite gui=underline cterm=underline
