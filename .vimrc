@@ -114,6 +114,8 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 nnoremap <silent> * *N
 nnoremap <silent> # #N
 
+nnoremap <C-E> <C-E>j
+nnoremap <C-Y> <C-Y>k
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -271,7 +273,8 @@ endif
 call plug#begin()
     if has('nvim')
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-        Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+        " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+        Plug 'nvim-tree/nvim-tree.lua'
         Plug 'ellisonleao/gruvbox.nvim'
         Plug 'rebelot/kanagawa.nvim'
         Plug 'folke/todo-comments.nvim'
@@ -315,8 +318,8 @@ call plug#begin()
 call plug#end()
 
 " chadtree
-let g:chadtree_settings = { 'view.sort_by': ['is_folder', 'file_name', 'ext'], 
-                          \ 'theme.text_colour_set': 'solarized_universal' }
+" let g:chadtree_settings = { 'view.sort_by': ['is_folder', 'file_name', 'ext'], 
+                          " \ 'theme.text_colour_set': 'solarized_universal' }
 
 " lua config
 if has('nvim')
@@ -325,7 +328,8 @@ endif
 
 " chadtree/nerdtree
 if has('nvim')
-    nnoremap <C-f> <cmd>CHADopen --always-focus<cr>
+    " nnoremap <C-f> <cmd>CHADopen --always-focus<cr>
+    nnoremap <C-f> <cmd>NvimTreeFindFile<cr>
 else
     nnoremap <leader>n :NERDTreeFocus<CR>
     nnoremap <C-n> :NERDTree<CR>
@@ -349,6 +353,9 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 nnoremap <Leader>gd :Gvdiffsplit<CR>
 nnoremap <Leader>gb :Git blame<CR>
 autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
+
+" copilot
+imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
 
 colorscheme kanagawa " gruvbox
 
