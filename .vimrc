@@ -20,20 +20,14 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
+set number
+set numberwidth=3
+
+set cursorlineopt=both
 set cursorline
 
 " Turn on the Wild menu
 set wildmenu
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-if has("win16") || has("win32")
-    set wildignore+=.git\*,.hg\*,.svn\*
-else
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
-endif
-
-set ruler
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -56,15 +50,12 @@ set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-set signcolumn=yes
+set signcolumn=yes:1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-
-" Set regular expression engine automatically
-set regexpengine=0
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -73,8 +64,6 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " Make italics work proper on a mac
-let &t_ZH="\e[3m"
-let &t_ZR="\e[23m"
 
 " gruvbox
 set background=dark
@@ -121,6 +110,9 @@ set wrap "Wrap lines
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+" don't move after highlighting
+nnoremap <silent> * *N
+nnoremap <silent> # #N
 
 
 " Disable highlight when <leader><cr> is pressed
@@ -184,14 +176,9 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
+" Remap VIM 0 to first non-blank character and alternate between 0 and ^ with 0
+nnoremap <silent> <expr> 0 virtcol('.') - 1 == indent('.') ? '0' : '^'
 
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-" nmap <M-j> mz:m+<cr>`z
-" nmap <M-k> mz:m-2<cr>`z
-" vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-" vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
@@ -286,6 +273,7 @@ call plug#begin()
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
         Plug 'ellisonleao/gruvbox.nvim'
+        Plug 'rebelot/kanagawa.nvim'
         Plug 'folke/todo-comments.nvim'
         Plug 'cameron-wags/rainbow_csv.nvim'
         Plug 'nvim-lua/plenary.nvim'
@@ -362,9 +350,12 @@ nnoremap <Leader>gd :Gvdiffsplit<CR>
 nnoremap <Leader>gb :Git blame<CR>
 autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
 
-colorscheme gruvbox
+colorscheme kanagawa " gruvbox
 
-hi CursorLine guibg=Grey16
 hi IlluminatedWordText gui=underline cterm=underline
 hi IlluminatedWordRead gui=underline cterm=underline
 hi IlluminatedWordWrite gui=underline cterm=underline
+hi CursorLineNr guibg=#363646
+hi CursorLineSign guibg=#363646
+
+autocmd VimEnter * if isdirectory(expand("%")) | cd % | endif
