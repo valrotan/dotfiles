@@ -26,6 +26,8 @@ set numberwidth=3
 set cursorlineopt=both
 set cursorline
 
+set cmdheight=0
+
 " Turn on the Wild menu
 set wildmenu
 

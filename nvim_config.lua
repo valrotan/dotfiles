@@ -260,6 +260,10 @@ local function nvim_on_attach(bufnr)
     vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
     vim.keymap.set('n', '<2-LeftMouse>', api.node.open.edit, opts('Open'))
     vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
+    vim.keymap.set('n', '_', ':NvimTreeResize -5<CR>', opts('Resize: +5'))
+    vim.keymap.set('n', '-', ':NvimTreeResize -5<CR>', opts('Resize: +5'))
+    vim.keymap.set('n', '+', ':NvimTreeResize +5<CR>', opts('Resize: +5'))
+    vim.keymap.set('n', '=', ':NvimTreeResize +5<CR>', opts('Resize: +5'))
 end
 
 require("nvim-tree").setup({
@@ -276,4 +280,9 @@ require("nvim-tree").setup({
     },
     git = { enable = true },
     update_focused_file = { enable = true },
+    actions = {
+        open_file = {
+            window_picker = { enable = false },
+        },
+    },
 })
