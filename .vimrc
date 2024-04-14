@@ -300,6 +300,8 @@ call plug#begin()
         Plug 'L3MON4D3/LuaSnip'
 
         Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v3.x'}
+        Plug 'nvim-lua/lsp-status.nvim'
+        Plug 'stevearc/conform.nvim'
 
         Plug 'RRethy/vim-illuminate'
         Plug 'numToStr/Comment.nvim'
@@ -359,7 +361,7 @@ autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
 " copilot
 imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
 
-colorscheme kanagawa " gruvbox
+colorscheme kanagawa-dragon " gruvbox
 
 hi IlluminatedWordText gui=underline cterm=underline
 hi IlluminatedWordRead gui=underline cterm=underline
