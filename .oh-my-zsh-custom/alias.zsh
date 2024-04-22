@@ -6,3 +6,4 @@ alias cd=z
 alias bc="bc -l"
 alias mamba=micromamba
 alias conda=micromamba
+alias mac="micromamba activate"

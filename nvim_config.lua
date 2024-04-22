@@ -56,7 +56,7 @@ local U = require('nordic.utils')
 C.diff = {
 	change = U.blend(C.yellow.dim, C.bg, 0.20),
 	change0 = U.blend(C.yellow.base, C.bg, 0.0),
-	change1 = U.blend(C.yellow.base, C.bg, 0.10),
+	change1 = U.blend(C.yellow.base, C.bg, 0.20),
 	add = U.blend(C.green.dim, C.bg, 0.10),
 	delete = U.blend(C.red.dim, C.bg, 0.20),
 }
