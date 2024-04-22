@@ -192,6 +192,18 @@ cmp.setup({
 		{ name = 'buffer' },
 		{ name = 'path' },
 	},
+	sorting = {
+		priority_weight = 2,
+		comparators = {
+			cmp.offset,
+			cmp.exact,
+			cmp.score,
+			cmp.recently_used,
+			cmp.kind,
+			cmp.length,
+			cmp.order,
+		},
+	},
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
