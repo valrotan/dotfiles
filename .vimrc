@@ -279,6 +279,7 @@ call plug#begin()
         Plug 'nvim-tree/nvim-tree.lua'
         Plug 'ellisonleao/gruvbox.nvim'
         Plug 'rebelot/kanagawa.nvim'
+        Plug 'AlexvZyl/nordic.nvim'
         Plug 'folke/todo-comments.nvim'
         Plug 'cameron-wags/rainbow_csv.nvim'
         Plug 'nvim-lua/plenary.nvim'
@@ -305,15 +306,15 @@ call plug#begin()
 
         Plug 'RRethy/vim-illuminate'
         Plug 'numToStr/Comment.nvim'
+        Plug 'nvim-lualine/lualine.nvim'
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'
+        Plug 'tpope/vim-commentary'
     endif
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-commentary'
-    Plug 'nvim-lualine/lualine.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.*', 'do': 'make install_jsregexp'}
     " Plug 'SirVer/ultisnips'
@@ -361,12 +362,10 @@ autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
 " copilot
 imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
 
-colorscheme kanagawa-dragon " gruvbox
+colorscheme nordic
 
 hi IlluminatedWordText gui=underline cterm=underline
 hi IlluminatedWordRead gui=underline cterm=underline
 hi IlluminatedWordWrite gui=underline cterm=underline
-hi CursorLineNr guibg=#363646
-hi CursorLineSign guibg=#363646
 
 autocmd VimEnter * if isdirectory(expand("%")) | cd % | endif

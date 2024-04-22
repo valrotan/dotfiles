@@ -1,56 +1,16 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- stylua: ignore
-colors = {
-    dragonBlack0  = '#0d0c0c',
-    dragonBlack1  = '#12120f',
-    dragonBlack2  = '#1D1C19',
-    dragonBlack3  = '#181616',
-    dragonBlack4  = '#282727',
-    dragonBlack5  = '#393836',
-    dragonBlack6  = '#625e5a',
-    dragonWhite   = '#c4c9c4',
-    dragonGreen   = '#80a980',
-    dragonGreen2  = '#869a74',
-    dragonPink    = '#a18ea3',
-    dragonOrange  = '#b68a6f',
-    dragonOrange2 = '#b9846e',
-    dragonGray    = '#a6a69a',
-    dragonGray2   = '#9e9a90',
-    dragonGray3   = '#788381',
-    -- dragonBlue    = '#6caeca',
-    dragonBlue2   = '#83a1b0',
-    dragonViolet  = '#838da7',
-    dragonRed     = '#c4635c',
-    dragonAqua    = '#89a4a1',
-    dragonAsh     = '#717c71',
-    dragonTeal    = '#8d9ab5',
-    dragonYellow  = '#c4ae7e',
-}
-
-local lualine_theme = {
-	normal = {
-		a = { fg = colors.dragonBlack0, bg = colors.dragonBlue2, gui = 'bold' },
-		b = { fg = colors.dragonWhite, bg = colors.dragonBlack0 },
-		c = { fg = colors.dragonWhite, bg = colors.dragonBlack0 },
-	},
-	insert = { a = { fg = colors.dragonBlack0, bg = colors.dragonGreen2 } },
-	visual = { a = { fg = colors.dragonBlack0, bg = colors.dragonOrange } },
-	replace = { a = { fg = colors.dragonBlack0, bg = colors.dragonRed } },
-	inactive = {
-		a = { fg = colors.dragonWhite, bg = colors.dragonBlack0 },
-		b = { fg = colors.dragonBlack6, bg = colors.dragonBlack0 },
-		c = { fg = colors.dragonWhite },
-	},
-}
+local custom_nordic = require('lualine.themes.nordic')
+custom_nordic.inactive.b.fg = '#4C566A'
+custom_nordic.inactive.c.fg = '#4C566A'
 
 require('lualine').setup({
 	options = {
-		theme = lualine_theme,
+		theme = custom_nordic,
 		section_separators = '',
 		component_separators = '',
-		globalstatus = true,
+		-- globalstatus = true,
 		always_divide_middle = false,
 	},
 	sections = {
@@ -60,19 +20,18 @@ require('lualine').setup({
 				return str:sub(1, 1)
 			end,
 		} },
-		lualine_b = { {
-			'windows',
-			disabled_buftypes = { 'quickfix', 'prompt' },
-		} },
-		lualine_c = {
-			'%=',
-			{
-				'filename',
-				path = 1,
-			},
-		},
-		lualine_x = { 'branch', 'diff', 'filetype' },
+		lualine_b = {},
+		lualine_c = { '%=', { 'filename' } },
+		lualine_x = {},
 		lualine_y = { 'progress' },
+		lualine_z = { 'location', 'searchcount' },
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = { '%=', { 'filename' } },
+		lualine_x = {},
+		lualine_y = {},
 		lualine_z = { 'location', 'searchcount' },
 	},
 	tabline = {
@@ -92,36 +51,40 @@ require('lualine').setup({
 	},
 })
 
-require('kanagawa').setup({
-	compile = true,
-	colors = {
-		pallette = colors,
-		theme = {
-			all = {
-				ui = {
-					bg_gutter = 'none',
-				},
-			},
-		},
+local C = require('nordic.colors')
+local U = require('nordic.utils')
+C.diff = {
+	change = U.blend(C.yellow.dim, C.bg, 0.20),
+	change0 = U.blend(C.yellow.base, C.bg, 0.0),
+	change1 = U.blend(C.yellow.base, C.bg, 0.10),
+	add = U.blend(C.green.dim, C.bg, 0.10),
+	delete = U.blend(C.red.dim, C.bg, 0.20),
+}
+require('nordic').setup({
+	-- swap_backgrounds = true,
+	transparent_bg = true,
+	override = {
+		Search = { bg = C.blue0, fg = C.white3, bold = false, underline = false },
+		IncSearch = { bg = C.blue0, fg = C.white3, bold = true },
+		CurSearch = { link = 'IncSearch' },
+		CursorLine = { bg = C.black2 },
+		CursorLineNr = { bg = C.black2 },
+		CursorLineSign = { bg = C.black2 },
+		Visual = { bg = C.gray1 },
+
+		DiffAdd = { bg = C.diff.add, bold = false },
+		DiffChange = { bg = C.diff.change0 },
+		DiffDelete = { bg = C.diff.delete },
+		DiffText = { bg = C.diff.change1, bold = false },
+		diffAdded = { fg = C.git.add },
+		diffRemoved = { fg = C.git.delete },
+		diffChanged = { fg = C.git.change },
+		diffOldFile = { fg = C.fg },
+		diffNewFile = { fg = C.green.base },
+		diffFile = { fg = C.fg },
+		diffLine = { bg = C.black2 },
+		diffIndexLine = {},
 	},
-	overrides = function(colors)
-		local theme = colors.theme
-		return {
-			NormalFloat = { bg = 'none' },
-			FloatBorder = { bg = 'none' },
-			FloatTitle = { bg = 'none' },
-
-			-- Save an hlgroup with dark background and dimmed foreground
-			-- so that you can use it where your still want darker windows.
-			-- E.g.: autocmd TermOpen * setlocal winhighlight=Normal:NormalDark
-			NormalDark = { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 },
-
-			-- Popular plugins that open floats will link to NormalFloat by default;
-			-- set their background accordingly if you wish to keep them dark and borderless
-			LazyNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-			MasonNormal = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
-		}
-	end,
 })
 
 require('nvim-treesitter.configs').setup({
