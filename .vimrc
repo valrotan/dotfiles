@@ -128,6 +128,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+nmap <silent> <C-G> :echo expand("%") . ":" . line(".")<CR>
+nmap <silent> 1<C-G> :file<CR>
+nmap <silent> 2<C-G> :echo expand("%") . ":" . line(".")<CR>
+nmap <silent> 3<C-G> :echo hostname() . ":" . expand("%:p")<CR>
+
 " Close the current buffer
 " map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
