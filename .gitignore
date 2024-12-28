@@ -1,4 +1,5 @@
 .DS_Store
 nvim/
+nvim.old/
 conda-zsh-completion/
 .oh-my-zsh-custom/host.zsh

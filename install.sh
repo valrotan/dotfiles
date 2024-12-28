@@ -13,7 +13,7 @@ case "${unameOut}" in
         nvim_url='https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz'
         ;;
     Darwin*)
-        nvim_url='https://github.com/neovim/neovim/releases/latest/download/nvim-macos.tar.gz'
+        nvim_url='https://github.com/neovim/neovim/releases/latest/download/nvim-macos-arm64.tar.gz'
         machine=Mac
         ;;
     *)
@@ -32,6 +32,7 @@ if [ -z $nvim_url ]; then
     echo Could not find Neovim installation for $machine. Please install it yourself under nvim/;
 else
     wget -O nvim.tar.gz $nvim_url
+    [ -e nvim ] && mv nvim nvim.old
     mkdir nvim && tar -xzf nvim.tar.gz -C nvim --strip-components 1
     rm nvim.tar.gz
 fi
