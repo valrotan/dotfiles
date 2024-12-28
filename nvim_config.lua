@@ -235,7 +235,7 @@ require('illuminate').configure({
 	under_cursor = true,
 	-- large_file_cutoff: number of lines at which to use large_file_config
 	-- The `under_cursor` option is disabled when this cutoff is hit
-	large_file_cutoff = 10000,
+	large_file_cutoff = 1000,
 	-- Supports the same keys passed to .configure
 	-- If nil, vim-illuminate will be disabled for large files.
 	large_file_overrides = nil,
@@ -377,3 +377,15 @@ vim.api.nvim_create_user_command('Format', Format, { range = true })
 vim.keymap.set({ 'n', 'v' }, '<leader>F', function()
 	require('conform').format({ async = true, lsp_fallback = true })
 end)
+
+require("high-str").setup({
+    verbosity = 0,
+    saving_path = "/tmp/highstr/",
+    highlight_colors = {
+        color_0 = {C.orange.base, "smart"},
+        color_1 = {C.yellow.base, "smart"},
+        color_2 = {C.green.base, "smart"},
+        color_3 = {C.magenta.base, "smart"},
+        color_4 = {C.red.base, "smart"},
+    }
+})

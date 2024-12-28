@@ -312,6 +312,7 @@ call plug#begin()
         Plug 'RRethy/vim-illuminate'
         Plug 'numToStr/Comment.nvim'
         Plug 'nvim-lualine/lualine.nvim'
+        Plug 'Pocco81/HighStr.nvim'
     else
         Plug 'preservim/nerdtree'
         Plug 'morhetz/gruvbox'
@@ -366,6 +367,17 @@ autocmd User FugitiveStageBlob setlocal readonly nomodifiable noswapfile
 
 " copilot
 imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
+
+" highlighting
+if has('nvim')
+    vmap <leader>h <ESC>:HSHighlight 1<CR>
+    vmap 0<leader>h <ESC>:HSHighlight 0<CR>
+    vmap 1<leader>h <ESC>:HSHighlight 1<CR>
+    vmap 2<leader>h <ESC>:HSHighlight 2<CR>
+    vmap 3<leader>h <ESC>:HSHighlight 3<CR>
+    vmap 4<leader>h <ESC>:HSHighlight 4<CR>
+    nmap <leader>h <ESC>:HSRmHighlight<CR>
+endif
 
 colorscheme nordic
 
